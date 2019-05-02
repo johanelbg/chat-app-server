@@ -5,7 +5,7 @@ const db = require("./config/db");
 const app = express();
 
 const room = require("./app/routes/room");
-const router = express.Router();
+const chat = require("./app/routes/chat");
 
 const port = 8000;
 
@@ -17,6 +17,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.use("/room", room);
+app.use("/chat", chat);
 
 mongoose
   .connect(db.url, { useNewUrlParser: true })
