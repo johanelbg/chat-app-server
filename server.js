@@ -2,14 +2,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
-const dotenv = require("dotenv");
-dotenv.config();
 
 const room = require("./app/routes/room");
 const chat = require("./app/routes/chat");
 
-const port = process.env.PORT || 8000;
-const mongo_url = process.env.MONGO_URL;
+const { port, mongo_url } = require("./config/config");
 
 app.use(
   bodyParser.urlencoded({
