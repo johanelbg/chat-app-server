@@ -6,7 +6,8 @@ const app = express();
 const room = require("./app/routes/room");
 const chat = require("./app/routes/chat");
 
-const { port, mongo_url } = require("./config/config");
+const port = process.env.PORT || 8000;
+const mongo_url = process.env.MONGO_URL || getMongoUrl();
 
 app.use(
   bodyParser.urlencoded({
@@ -26,3 +27,8 @@ mongoose
     })
   )
   .catch(err => console.log(`connection failed: ${err}`));
+
+function getMongoUrl() {
+  const { mongo_url } = require("./config/config");
+  return mongo_url;
+}
