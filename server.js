@@ -2,12 +2,15 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const app = express();
+const cors = require("cors");
 
 const room = require("./app/routes/room");
 const chat = require("./app/routes/chat");
 
 const port = process.env.PORT || 8000;
 const mongo_url = process.env.MONGO_URL || getMongoUrl();
+
+app.use(cors());
 
 app.use(
   bodyParser.urlencoded({
@@ -29,6 +32,6 @@ mongoose
   .catch(err => console.log(`connection failed: ${err}`));
 
 function getMongoUrl() {
-  const { mongo_url } = require("./config/config");
+  const { mongo_url } = require("./config");
   return mongo_url;
 }
