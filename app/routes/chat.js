@@ -9,8 +9,8 @@ router.get("/", function(req, res, next) {
   });
 });
 
-router.get("/:id", function(req, res, next) {
-  Chat.findById(req.params.id, (err, post) => {
+router.get("/:room_id", function(req, res, next) {
+  Chat.find({ room: req.params.room_id }, (err, post) => {
     if (err) return next(err);
     res.json(post);
   });
