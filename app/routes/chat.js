@@ -4,18 +4,14 @@ const Chat = require("../models/Chat.js");
 const server = require("http").Server(express);
 const io = require("socket.io")(server);
 
-const port = process.env.PORT || 4000;
+const port = 4000;
 
 server.listen(port);
 
 io.on("connection", function(socket) {
-  console.log("User connected");
-  socket.on("disconnect", function() {
-    console.log("User disconnected");
-  });
-  socket.on("save-message", function(data) {
-    console.log(data);
-    io.emit("new-message", { message: data });
+  socket.on("postMessage", msg => {
+    console.log(msg);
+    io.emit("postMessage", msg);
   });
 });
 
